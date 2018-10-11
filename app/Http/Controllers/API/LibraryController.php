@@ -8,9 +8,11 @@ use App\Library;
 
 class LibraryController extends Controller
 {
-  public function index()
+  public function index(Request $request)
   {
-      return Library::all();
+    $library = new Library;
+    $library = $this->applySearchSort($library, $request);
+    return $library->get();
   }
 
   public function show(Library $library)
@@ -43,6 +45,32 @@ class LibraryController extends Controller
   {
       $library->delete();
       return response()->json(null, 204);
+  }
+
+
+  private function applySearchSort($library, $request)
+  {
+    $keyboard = $request->search;
+    $sortableFields = ['title', 'isbn_number', 'author_first_name', 'year_of_creation'];
+
+    //Apply search
+      if ( $keyboard )
+      $library = $library->where('title', 'like', '%'.$keyboard.'%')
+      ->orWhere('title', 'like', '%'.$keyboard.'%')
+      ->orWhere('isbn_number', 'like', '%'.$keyboard.'%')
+      ->orWhere('author_first_name', 'like', '%'.$keyboard.'%')
+      ->orWhere('author_last_name', 'like', '%'.$keyboard.'%')
+      ->orWhere('year_of_creation', 'like', '%'.$keyboard.'%');
+
+      //Apply Sorting
+      if (  in_array($request->sort, $sortableFields) )
+      {
+        $order = ($request->order)? $request->order : 'asc';
+        $library = $library->orderBy($request->sort, $order);
+      }
+
+      return $library;
+
   }
 
 }
