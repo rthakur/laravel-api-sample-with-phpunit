@@ -1,5 +1,5 @@
 
-#Search and sort arguments: 
+#Search and sort arguments:
 
 URL: http://localhost:8000/api/library
 
@@ -12,7 +12,7 @@ Request headers
 | Optional 	| order		    	| asc,desc	     						|
 
 
-#Insert: 
+#Insert:
 Method: POST
 URL: http://localhost:8000/api/library
 
@@ -25,7 +25,7 @@ URL: http://localhost:8000/api/library
 | yes 	        | year_of_creation		| integer	     	 |
 
 
-#Update: 
+#Update:
 Method: PUT
 URL: http://localhost:8000/api/library/{id}
 
@@ -38,11 +38,6 @@ URL: http://localhost:8000/api/library/{id}
 | yes 	        | year_of_creation		| integer	     	 |
 
 
-#Delete: 
-Method: delete
+#Delete:
+Method: Delete
 URL: http://localhost:8000/api/library/{id}
-
-
-
-
-
