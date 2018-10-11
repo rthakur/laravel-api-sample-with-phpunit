@@ -44,7 +44,7 @@ class LibraryController extends Controller
   {
     $library = Library::find($id);
 
-    if(!$library) return response()->json(['message' => 'Content not found!', 'status' => 202]);
+    if(!$library) return response()->json(['message' => 'Content not found!'], 202);
 
     $errors = $this->validateRequest($request, $id);
 
