@@ -46,6 +46,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
+        if ($request->segment(1) == 'api')
+          return $exception->getMessage();
+        
         return parent::render($request, $exception);
     }
 }
